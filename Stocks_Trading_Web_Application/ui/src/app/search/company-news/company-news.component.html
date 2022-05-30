@@ -1,0 +1,87 @@
+<!-- 
+<div class="card-horizontal border bg-light" style="height: 150px; overflow: hidden">
+    <div class="p-3">
+        <img [src]="news.image" alt="Card image cap" width="150px">
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">{{news.headline}}</h4>
+    </div>
+</div> -->
+
+
+<div class="row">
+    <div class="col-md-auto">
+
+        <div class="card mb-3 border bg-light" style="min-height: 120px" (click)="openNewsModal()">
+            <div class="row no-gutters">
+                <div class="col-md-4 p-3" style="max-height:85px; max-width:300px;">
+                    <img [src]="news.image" class="card-img" alt="..." style="max-height:85px; max-width:300px;">
+                </div>
+                <div class="col-md-8 align-self-center">
+                    <div class="card-body">
+                        <p class="card-text">{{news.headline}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <ng-template #newsModal let-modal>
+    <div class="modal-header">
+        <h2 class="modal-title" id="modal-basic-title">{{news.source}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="close(buyModal)">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row h3">
+                {{news.headline}}
+            </div>
+            <div class="row">
+                {{news.summary}}
+            </div>
+            <div class="row">
+                <span class="text-muted">For more details click &nbsp;</span>
+                <a [href]="news.url" target="_blank"> here</a>
+            </div>
+        </div>
+    </div>
+    <div class="card justify-content-start m-3">
+        <div class="row ml-3 mt-3">
+            Share
+        </div>
+        <div class="row m-3">
+            <div class="fa-3x">
+                <a href="twitter.com" target="_blank">
+                    <fa-icon [icon]="faTwitter" style="color: #1DA1F2;"></fa-icon>
+                </a>
+
+                <a href="facebook.com" target="_blank">
+                    <fa-icon [icon]="faFacebook" style="color: #4267B2"></fa-icon>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer justify-content-start">
+        <div class="container">
+            <div class="row">
+                Share
+            </div>
+            <div class="row">
+                <div class="col-sm fa-3x">
+                    <a href="facebook.com" target="_blank">
+                        <fa-icon [icon]="faFacebook" style="color: #4267B2"></fa-icon>
+                    </a>
+                    <a href="facebook.com" target="_blank">
+                        <fa-icon [icon]="faTwitter" style="color: #1DA1F2;"></fa-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+<!-- </ng-template> -->

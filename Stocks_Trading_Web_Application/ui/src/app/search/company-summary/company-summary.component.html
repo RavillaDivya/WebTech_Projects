@@ -1,0 +1,62 @@
+<div class="container">
+    <ng-template [ngIf]="companyProfile && companyQuote">
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col offset-2">
+
+                        <div class="row mt-3">
+                            <div class="col-auto">
+                                <div class="row"><b>High Price:</b></div>
+                                <div class="row"><b>Low Price:</b></div>
+                                <div class="row"><b>Open Price:</b></div>
+                                <div class="row"><b>Prev Close:</b></div>
+                            </div>
+                            <div class="col ml-1">
+                                <div class="row">{{companyQuote.h | formatter}}</div>
+                                <div class="row">{{companyQuote.l | formatter}}</div>
+                                <div class="row">{{companyQuote.o | formatter}}</div>
+                                <div class="row">{{companyQuote.pc | formatter}}</div>
+                            </div>
+                        </div>
+                        <!-- <div class="row"><b>High Price:</b> {{companyQuote.h}}</div>
+                        <div class="row"><b>Low Price:</b> {{companyQuote.l}}</div>
+                        <div class="row"><b>Open Price:</b> {{companyQuote.o}}</div>
+                        <div class="row"><b>Prev Close:</b> {{companyQuote.pc}}</div> -->
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col h5 text-center">
+                        <u>About the company</u>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col ml-3">
+                        <div class="row"><b>IPO Start Date:</b> &nbsp; {{companyProfile.ipo}}</div>
+                        <br>
+                        <div class="row"><b>Industry:</b> &nbsp; {{companyProfile.finnhubIndustry}}</div>
+                        <br>
+                        <div class="row"><b>Webpage:</b> <a [href]="companyProfile.weburl"
+                                target="_blank"> &nbsp; {{companyProfile.weburl}}</a></div>
+                        <br>
+                        <div class="row"><b>Company Peers:</b> &nbsp;
+                            <div *ngFor="let peer of companyPeers">
+                                <a [routerLink]="['/search/', peer]">{{peer}},</a> &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm">
+                <highcharts-chart class="highcharts-container" [Highcharts]="Highcharts"
+                    [callbackFunction]="chartCallback" [options]="chartOptions" [(update)]="updateFlag"
+                    style="width: 100%; display: block;">
+                </highcharts-chart>
+            </div>
+        </div>
+
+    </ng-template>
+</div>

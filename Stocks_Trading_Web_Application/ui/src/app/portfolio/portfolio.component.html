@@ -1,0 +1,78 @@
+<!-- <p>portfolio works!</p>
+<p>{{portfolio.size}}</p> -->
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col">
+            <ngb-alert *ngIf="transactionMessage" class="text-center" #selfClosingTransaction [type]="transactionType"
+                (closed)="transactionMessage = ''">
+                {{transactionMessage}}
+            </ngb-alert>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col">
+            <ngb-alert *ngIf="(buyMessage && buyMessage.ticker)" class="text-center" #selfClosingBuy type="danger" (closed)="buyMessage = null">
+                {{buyMessage?.ticker | uppercase}} bought successfully.
+            </ngb-alert>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <ngb-alert *ngIf="(sellMessage && sellMessage.ticker)" class="text-center" #selfClosingSell type="success" (closed)="sellMessage = null">
+                {{sellMessage?.ticker | uppercase}} sold successfully.
+            </ngb-alert>
+        </div>
+    </div> -->
+
+
+
+    <!-- <div [hidden]="!(buyMessage && buyMessage.ticker)" class="row">
+        <div class="col">
+            <div class="alert alert-success text-center alert-dismissible fade show" role="alert">
+                {{buyMessage?.ticker | uppercase}} bought successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="clearBuyMessage()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div [hidden]="!(sellMessage && sellMessage.ticker)" class="row">
+        <div class="col">
+            <div class="alert alert-danger text-center alert-dismissible fade show" role="alert">
+                {{sellMessage?.ticker | uppercase}} sold successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="clearSellMessage()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="row">
+        <div class="col h1">
+            My Portfolio
+        </div>
+    </div>
+    <div class="row">
+        <div class="col h3">
+            Money in Wallet: ${{wallet | formatter}}
+        </div>
+    </div>
+
+    <div [hidden]="(portfolio && portfolio.size > 0)" class="row">
+        <div class="col">
+            <div class="alert alert-warning text-center" role="alert">
+                Currently you don't have any stock.
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let item of portfolio | keyvalue: asIsOrder">
+        <app-company-portfolio [company]="item.value" (companyBuy)="setBuyMessage($event)"
+            (companySell)="setSellMessage($event)"></app-company-portfolio>
+    </div>
+</div>

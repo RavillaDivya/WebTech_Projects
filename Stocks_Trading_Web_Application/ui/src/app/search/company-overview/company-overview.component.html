@@ -1,0 +1,158 @@
+<ng-template [ngIf]="companyProfile">
+    <div class="container">
+        <div class="row">
+            <div class="col" style="padding: 0;">
+                <ngb-alert *ngIf="watchlistMessage" class="text-center" #selfClosingWatchlist [type]="watchlistType"
+                    (closed)="watchlistMessage = ''">
+                    {{watchlistMessage}}
+                </ngb-alert>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" style="padding: 0;">
+                <ngb-alert *ngIf="transactionMessage" class="text-center" #selfClosingTransaction
+                    [type]="transactionType" (closed)="transactionMessage = ''">
+                    {{transactionMessage}}
+                </ngb-alert>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <div class="row justify-content-start">
+                    <div class="h1">{{companyProfile?.ticker}}
+                        <button type="button" class="btn watchListBtn" (click)="toggleWatchlist()" style>
+                            <ng-template [ngIf]="watchlist.has(selectedStock)">
+                                <span class='bi bi-star-fill h4' style='color: #f3da35;'></span>
+                            </ng-template>
+                            <ng-template [ngIf]="!watchlist.has(selectedStock)">
+                                <span class='bi bi-star h4'></span>
+                            </ng-template>
+                        </button>
+                    </div>
+
+                </div>
+                <div class="row h3 text-muted">{{companyProfile?.name}}</div>
+                <div class="row textRegular">{{companyProfile?.exchange}}</div>
+            </div>
+            <div class="col-2">
+                <div class="row justify-content-center "><img class="companyLogo" [src]="companyProfile?.logo"
+                        alt="profile photo"></div>
+            </div>
+            <div class="col-5">
+                <div class="row justify-content-end h1" [style.color]="tickerStatus()">
+                    {{companyQuote?.c | number: '1.2-2'}}
+                </div>
+                <div class="row justify-content-end text-right h3" [style.color]="tickerStatus()">
+                    <div>
+                    <ng-template [ngIf]="companyQuote?.dp > 0">
+                        <i class="bi bi-caret-up-fill"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="companyQuote?.dp < 0">
+                        <i class="bi bi-caret-down-fill"></i>
+                    </ng-template>
+                    {{companyQuote?.d | formatter}}
+                    </div>({{companyQuote?.dp | formatter}}%)
+                </div>
+                <div class="row justify-content-end text-right textRegular">
+                    {{currentTime | date: 'yyyy-MM-dd HH:mm:ss'}}
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row mt-1">
+            <button type="button" class="btn btn-success mr-1" (click)="open(content)">Buy</button>
+            <ng-template [ngIf]="portfolio.has(selectedStock)">
+                <button type="button" class="btn btn-danger ml-1" (click)="open(sellModal)">Sell</button>
+            </ng-template>
+        </div> -->
+        <div class="row mt-1">
+            <button type="button" class="btn btn-success mr-1" (click)="openBuyModal()">Buy</button>
+            <ng-template [ngIf]="portfolio.has(selectedStock)">
+                <button type="button" class="btn btn-danger ml-1" (click)="openSellModal()">Sell</button>
+            </ng-template>
+        </div>
+        <div class="row p-2">
+            <div class="col text-center" [style.color]="marketStatusColor">
+                <b>{{marketStatus}}</b>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<!-- 
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{companyProfile?.ticker | uppercase}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(content)">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <div class="row">
+                    Current Price: {{companyQuote?.c}}
+                </div>
+                <div class="row">
+                    Money in Wallet: {{wallet}}
+                </div>
+                <div class="row">
+                    <div class="form-group form-inline">
+                        <label for="number">Quantity </label>
+                        <input name="test" type="number" class="form-control" id="number" [(ngModel)]="quantity">
+                    </div>
+                </div>
+                <div class="row text-danger">
+                    <ng-template [ngIf]="(wallet - (quantity * companyQuote?.c))<0">
+                        <span>Not enough money in wallet!</span>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <p class="total">Total: {{ (quantity * companyQuote?.c) | number: '1.2-2' }}</p>
+        <button type="button" class="btn btn-success"
+            [disabled]="quantity <= 0 || (wallet - (quantity * companyQuote?.c))<0"
+            (click)="buyStocks(content)">Buy</button>
+    </div>
+</ng-template>
+
+<ng-template #sellModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{companyProfile?.ticker | uppercase}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(sellModal)">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <div class="row">
+                    Current Price: {{companyQuote?.c}}
+                </div>
+                <div class="row">
+                    Money in Wallet: {{wallet}}
+                </div>
+                <div class="row">
+                    <div class="form-group form-inline">
+                        <label for="number">Quantity </label>
+                        <input name="test" type="number" class="form-control" id="number" [(ngModel)]="quantity">
+                    </div>
+                </div>
+                <div class="row text-danger">
+                    <ng-template [ngIf]="quantity > portfolio.get(selectedStock)?.quantity">
+                        <span>You cannot sell the stocks that you don't have!</span>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <p class="total">Total: {{ (quantity * companyQuote?.c) | number: '1.2-2' }}</p>
+        <button type="button" class="btn btn-success"
+            [disabled]="quantity <= 0 || (quantity > portfolio.get(selectedStock).quantity)"
+            (click)="sellStocks(sellModal)">Sell</button>
+    </div>
+</ng-template> -->

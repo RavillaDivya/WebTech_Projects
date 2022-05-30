@@ -1,0 +1,48 @@
+<div class="container">
+    <!-- <div class="row justify-content-center">
+        <div class="col-md-auto">
+            Variable width content
+        </div>
+    </div> -->
+    <div class="row justify-content-center ">
+        <div class="col-md-6">
+            <table class="table text-center text-sm-center">
+                <caption class="h3 text-dark text-sm-center" style="caption-side: top;">Social Sentiments</caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-secondary">{{companyProfile?.name}}</th>
+                        <th scope="col" class="table-secondary">Reddit</th>
+                        <th scope="col" class="table-secondary">Twitter</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" class="table-secondary">Total Mentions</th>
+                        <td>{{sentimentTableData.reddit[0]}}</td>
+                        <td>{{sentimentTableData.twitter[0]}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table-secondary">Positive Mentions</th>
+                        <td>{{sentimentTableData.reddit[1]}}</td>
+                        <td>{{sentimentTableData.twitter[1]}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="table-secondary">Negative Mentions</th>
+                        <td>{{sentimentTableData.reddit[2]}}</td>
+                        <td>{{sentimentTableData.twitter[2]}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mt-3">
+            <app-chart-recommendation [selectedStock]="selectedStock" [companyRecommendation]="companyRecommendation">
+            </app-chart-recommendation>
+        </div>
+        <div class="col-md-6 mt-3">
+            <app-chart-earnings [selectedStock]="selectedStock" [companyEarnings]="companyEarnings">
+            </app-chart-earnings>
+        </div>
+    </div>
+</div>

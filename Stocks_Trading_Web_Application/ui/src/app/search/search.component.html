@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-auto">
+            <p class="h2">STOCK SEARCH</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-9 col-md-4 col-lg-4">
+            <form>
+                <div class="input-group rounded-pill bg-transparent">
+                    <input class="form-control no-border" matInput type="text" placeholder="Enter stock ticker symbol"
+                        [formControl]="searchStockCtrl" [matAutocomplete]="auto">
+                    <button type="btn" class="btn fs-4" (click)="searchStock()">
+                        <i class="bi bi-search"></i>
+                    </button>
+                    <button type="btn" class="btn fs-6" (click)="clearResults()">
+                        <i class="bi bi-x-lg"></i>
+                        <!-- <mat-icon>close</mat-icon> -->
+                    </button>
+
+                </div>
+
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)">
+                    <mat-option *ngIf="isLoading">
+                        <mat-spinner [diameter]="40"></mat-spinner>
+                    </mat-option>
+                    <ng-container *ngIf="!isLoading">
+                        <mat-option *ngFor="let stock of stockSuggestions" [value]="stock.symbol">
+                            <span>{{stock.symbol}} | {{stock.description}}</span>
+                        </mat-option>
+                    </ng-container>
+                </mat-autocomplete>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ngb-alert *ngIf="validTickerMessage" class="text-center mt-5" #validTickerAlert type="danger"
+                (closed)="validTickerMessage = ''">
+                {{validTickerMessage}}
+            </ngb-alert>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col">
+            <ngb-alert *ngIf="noDataFoundMessage" [dismissible]="false" class="text-center mt-5" #validTickerAlert
+                type="danger">
+                {{noDataFoundMessage}}
+            </ngb-alert>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-12 mt-5 detailsWidth">
+            <!-- <ng-template [ngIf]="selectedStock">
+                <div *ngFor="let stock of selectedStock">
+                    <app-company-details [selectedStock]="stock"></app-company-details>
+                </div>
+            </ng-template> -->
+
+            <ng-template [ngIf]="companyProfile">
+                <app-search-details [selectedStock]="selectedStock" [companyProfile]="companyProfile">
+                </app-search-details>
+            </ng-template>
+        </div>
+    </div>
+</div>

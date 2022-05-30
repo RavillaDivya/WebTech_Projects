@@ -1,0 +1,54 @@
+<div class="container">
+    <mat-spinner *ngIf="loadingCounter !== 0" class="mt-4 mx-auto"></mat-spinner>
+
+    <!-- <ng-template #loadingComplete> -->
+    <div class="row">
+        <div class="col">
+            <app-company-overview [selectedStock]="selectedStock" [companyProfile]="companyProfile"
+                [companyQuote]="companyQuote">
+            </app-company-overview>
+        </div>
+    </div>
+
+    
+    <div class="row mt-3">
+        <div class="col-12">
+            <mat-tab-group mat-stretch-tabs (selectedTabChange)="handleChange($event)" animationDuration="0ms">
+                <mat-tab label="Summary">
+                    <app-company-summary [selectedStock]="selectedStock" [companyProfile]="companyProfile"
+                        [companyQuote]="companyQuote" [companyPeers]="companyPeers" [hourlyPrices]="hourlyPrices">
+                    </app-company-summary>
+                </mat-tab>
+                <mat-tab label="Top News">
+                    <div class="row">
+                        <div class="card-columns p-3" style="overflow: hidden;">
+                            <div *ngFor="let news of companyNews;">
+                                <app-company-news [news]="news"></app-company-news>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Charts">
+
+                    <ng-template [ngIf]="historicalPrices && historicalPrices.s==='ok'">
+                        <!-- <div *ngIf="historicalPrices">
+                            <app-chart-historic [selectedStock]="selectedStock" [historicalPrices]="historicalPrices">
+                            </app-chart-historic>
+                        </div> -->
+                        <div *ngFor="let item of historicalChartData">
+                            <app-chart-historic [selectedStock]="item.name" [historicalPrices]="item.data">
+                            </app-chart-historic>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+                <mat-tab label="Insights">
+                    <app-company-insights [selectedStock]="selectedStock"
+                        [companyRecommendation]="companyRecommendation" [companyEarnings]="companyEarnings"
+                        [companySentiment]="companySentiment" [companyProfile]="companyProfile"></app-company-insights>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+    <!-- </ng-template> -->
+
+</div>

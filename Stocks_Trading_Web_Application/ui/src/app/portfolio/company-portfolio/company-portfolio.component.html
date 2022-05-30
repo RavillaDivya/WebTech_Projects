@@ -1,0 +1,129 @@
+<ng-template [ngIf]="company">
+    <div class="card mt-3">
+        <div class="card-header" [routerLink]="['/search/', company.ticker]" style="cursor: pointer;">
+            <span class="h2 card-title">{{company.ticker | uppercase}} </span>
+            <span class="h4 card-title text-muted">{{company.name}}</span>
+        </div>
+        <div class="card-body">
+            <div class="row portfolioFont">
+                <div class="col-sm mx-3">
+                    <div class="row justify-content-between">
+                        <div>Quantity:</div>
+                        <div>{{currentQuantity | formatter}}</div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div>Avg. Cost / Share:</div>
+                        <div>{{avgCost | formatter}}</div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div>Total Cost:</div>
+                        <div>{{totalCost | formatter}}</div>
+                    </div>
+                </div>
+                <div class="col-sm mx-3">
+                    <div class="row justify-content-between">
+                        <div>Change:</div>
+                        <div [style.color]="tickerStyle">
+                            <ng-template [ngIf]="change > 0">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </ng-template>
+                            <ng-template [ngIf]='change < 0'>
+                                <i class="bi bi-caret-down-fill"></i>
+                            </ng-template>
+                            {{change | formatter}}
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div>Current Price:</div>
+                        <div [style.color]="tickerStyle">{{currentPrice | formatter}}</div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div>Market Value:</div>
+                        <div [style.color]="tickerStyle">{{currentMarketValue | formatter}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary mx-2" (click)="openBuyModal()">Buy</button>
+                <button type="button" class="btn btn-danger mx-2" (click)="openSellModal()">Sell</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- <ng-template #buyModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{company.ticker | uppercase}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(buyModal)">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <div class="row">
+                    Current Price: {{company.c}}
+                </div>
+                <div class="row">
+                    Money in Wallet: {{wallet}}
+                </div>
+                <div class="row">
+                    <div class="form-group form-inline">
+                        <label for="number">Quantity </label>
+                        <input name="test" type="number" class="form-control" id="number" [(ngModel)]="quantity">
+                    </div>
+                </div>
+                <div class="row text-danger">
+                    <ng-template [ngIf]="(wallet - (quantity * company.c))<0">
+                        <span>Not enough money in wallet!</span>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <p class="total">Total: {{ (quantity * company.c) | number: '1.2-2' }}</p>
+        <button type="button" class="btn btn-success"
+            [disabled]="quantity <= 0 || (wallet - (quantity * company.c))<0"
+            (click)="buyStocks(buyModal)">Buy</button>
+    </div>
+</ng-template>
+
+<ng-template #sellModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{company.ticker | uppercase}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close(sellModal)">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <div class="row">
+                    Current Price: {{company.c}}
+                </div>
+                <div class="row">
+                    Money in Wallet: {{wallet}}
+                </div>
+                <div class="row">
+                    <div class="form-group form-inline">
+                        <label for="number">Quantity </label>
+                        <input name="test" type="number" class="form-control" id="number" [(ngModel)]="quantity">
+                    </div>
+                </div>
+                <div class="row text-danger">
+                    <ng-template [ngIf]="quantity > company.quantity">
+                        <span>You cannot sell the stocks that you don't have!</span>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <p class="total">Total: {{ (quantity * company.c) | number: '1.2-2' }}</p>
+        <button type="button" class="btn btn-success" [disabled]="quantity <= 0 || (quantity > company.quantity)"
+            (click)="sellStocks(sellModal)">Sell</button>
+    </div>
+</ng-template> -->

@@ -1,0 +1,17 @@
+.navbar {
+    background-color: #2324AB;
+}
+
+/* .nav-item.active {
+    border: 1px solid white;
+    border-radius: 1em;
+} */
+
+.active {
+    border: 1px solid white;
+    border-radius: 1em;
+}
+
+.nav-item {
+    text-align: right;
+}

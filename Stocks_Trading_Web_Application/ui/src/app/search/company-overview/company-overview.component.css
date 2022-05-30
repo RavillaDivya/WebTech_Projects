@@ -1,0 +1,49 @@
+.watchListBtn {
+    margin-top: -0.5em;
+    margin-left: -1em;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.companyLogo {
+    width: 50%;
+    height: 50%;
+}
+
+.h1, .h3, .h4 {
+    font-weight: 400;
+}
+
+@media (max-device-width: 576px) {
+    .h1 {
+        font-size: 1.75rem;
+        font-weight: 400;
+    }
+
+    .h3 {
+        font-size: 1.25rem;
+        font-weight: 400;
+    }
+
+    .h4 {
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
+
+    .textRegular {
+        font-size: 1.0rem;
+    }
+
+    .companyLogo {
+        width: 80%;
+        height: 80%;
+    }
+}
+
+@media (max-device-width: 768px) {}
+
+@media (max-device-width: 992px) {}
+
+@media (max-device-width: 1200px) {}

@@ -1,0 +1,9 @@
+.h2, .h4 {
+    font-weight: 400;
+}
+
+.portfolioFont {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: initial;
+}

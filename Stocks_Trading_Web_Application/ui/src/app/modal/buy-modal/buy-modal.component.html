@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ticker | uppercase}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body ml-3">
+    <form (submit)="buyStocks()">
+        <div class="container">
+            <div class="row">
+                Current Price: {{price | formatter}}
+            </div>
+            <div class="row">
+                Money in Wallet: ${{wallet | formatter}}
+            </div>
+            <div class="row">
+                <div class="form-inline">
+                    <label for="number">Quantity </label>
+                    <input name="test" type="number" class="form-control ml-2" id="number" [(ngModel)]="quantity">
+                </div>
+            </div>
+            <div class="row text-danger mt-2">
+                <ng-template [ngIf]="(wallet - (quantity * price))<0">
+                    <span>Not enough money in wallet!</span>
+                </ng-template>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer justify-content-between">
+    <p class="total">Total: {{ (quantity * price) | formatter }}</p>
+    <input type="submit" class="btn btn-success" [disabled]="quantity <= 0 || (wallet - (quantity * price))<0"
+        (click)="buyStocks()" value="Buy">
+</div>
