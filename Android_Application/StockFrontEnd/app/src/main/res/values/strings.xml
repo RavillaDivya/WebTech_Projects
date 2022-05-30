@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Stocks</string>
+    <string name="recommendation_html">
+        <![CDATA[<html lang="en" >
+<head>
+    <meta charset=\"utf-8\" />
+    <meta name=\"author\" content=\"Script Tutorials\" />
+    <title>HighCharts Recommendation Charts</title>
+
+    <script src=\"http://code.jquery.com/jquery-1.7.1.min.js\"></script>
+    <script src=\"http://code.highcharts.com/highcharts.js\"></script>
+
+</head>
+<body>
+<div id=\"chart_1\" class=\"chart\"></div>
+<p id=\"disp\"></p>
+<script type=\'text/javascript\'>
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const xhr = new XMLHttpRequest();
+
+const element = document.getElementById(\"disp\")
+element.innerHTML = \"shit\"
+</script>
+</body>
+</html>]]>
+    </string>
+</resources>

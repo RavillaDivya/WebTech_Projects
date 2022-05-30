@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:id="@+id/search"
+        android:title="search_title"
+        android:queryHint="Search.."
+        android:icon="@drawable/ic_search"
+        android:searchIcon="@null"
+        android:iconifiedByDefault="false"
+        app:queryBackground="@null"
+        android:queryBackground="@android:color/white"
+        app:showAsAction="collapseActionView|ifRoom"
+         />
+</menu>

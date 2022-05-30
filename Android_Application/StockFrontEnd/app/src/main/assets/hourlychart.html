@@ -1,0 +1,95 @@
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Script Tutorials" />
+    <title>HighCharts Recommendation Charts</title>
+
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/indicators.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/volume-by-price.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+</head>
+<body>
+<div id="chart_4" class="chart"></div>
+<script type='text/javascript'>
+
+var s = JSON.parse(Sick_4.getData());
+var chart_data = [];
+var n = s['t'].length;
+
+
+for (i=0; i<n; i++) {
+	chart_data.push([s['t'][i]*1000, s['c'][i]]);
+}
+
+
+var change=2;
+var colorVal = "#000000";
+
+if(change > 0) {
+    colorVal = "#22bb33";
+} else if(change < 0) {
+    colorVal = "#bb2124";
+}
+
+$(document).ready(function() {
+
+      chartOptions = {
+        title: {
+          text: s['s']+' Hourly Price Variation',
+        },
+
+        chart: {
+          marginRight: 20,
+          marginLeft: 20
+        },
+        xAxis: {
+          type: 'datetime',
+          useUTC: false,
+          scrollbar: {
+              enabled: true
+          }
+        },
+        yAxis: [{
+          labels: {
+              align: 'right',
+          },
+          title: {
+              text: '',
+          },
+          opposite: true,
+        }],
+        legend: {
+          enabled: false
+        },
+        series: [{
+          type: 'line',
+          name: 'Stock Price',
+          data: chart_data,
+          color: colorVal,
+          // Need to add color here
+          marker: {
+              enabled: false
+          },
+          threshold: null
+        },
+
+        ],
+        time: {
+          timezoneOffset: 7 * 60
+        },
+    };
+
+    Highcharts.chart('chart_4', chartOptions);
+
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="310dp"
+    >
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+
+        android:id="@+id/first_news_image"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_backup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundimage" />
+
+    <TextView
+        android:id="@+id/first_news_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:text="Yahoo"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_news_image" />
+
+    <TextView
+        android:id="@+id/first_news_time_elapsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:text="4 hours ago"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/first_news_source"
+        app:layout_constraintTop_toBottomOf="@+id/first_news_image" />
+
+    <TextView
+        android:id="@+id/first_news_news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="20dp"
+        android:text="Greenpeace, Crypto Billionaire Lobby to change"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_news_source" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

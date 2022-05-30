@@ -1,0 +1,76 @@
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Script Tutorials" />
+    <title>HighCharts Recommendation Charts</title>
+
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/indicators.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/volume-by-price.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+</head>
+<body>
+<div id="chart_2" class="chart"></div>
+<script type='text/javascript'>
+
+var s = JSON.parse(Sick_2.getData());
+var actual = JSON.parse(s['actual']);
+var estimate = JSON.parse(s['estimate']);
+var surprise = JSON.parse(s['surprise']);
+
+let period = JSON.parse(s['period']);
+const s_period = period.toString().split(",");
+var x_axis = []
+
+for (var i = 0; i < actual.length; i++) {
+     x_axis.push(period[i] + "<br>Surprise: " + surprise[i]);
+}
+
+
+$(document).ready(function() {
+
+    chartOptions = {
+        chart: {
+            type: "spline"
+        },
+        title: {
+            text: "Historical EPS Surprises"
+        },
+        xAxis: {
+            reversed: false,
+            maxPadding: 0.05,
+            showLastLabel: true,
+            categories: x_axis
+        },
+        yAxis: {
+            title: {
+                text: "Quarterly EPS"
+            }
+        },
+        tooltip: {
+            shared: true
+        },
+        series: [{
+                name: 'Actual',
+                data: actual,
+                type: 'spline'
+            },
+            {
+                name: 'Estimate',
+                data: estimate,
+                type: 'spline'
+            }]
+    };
+
+    Highcharts.chart('chart_2', chartOptions);
+})
+
+</script>
+</body>
+</html>

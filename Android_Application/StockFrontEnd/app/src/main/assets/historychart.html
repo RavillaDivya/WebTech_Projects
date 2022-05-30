@@ -1,0 +1,145 @@
+<html lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Script Tutorials" />
+    <title>HighCharts Recommendation Charts</title>
+
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/data.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/indicators.js"></script>
+    <script src="https://code.highcharts.com/stock/indicators/volume-by-price.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+</head>
+<body>
+<div id="chart_3" class="chart"></div>
+<script type='text/javascript'>
+
+var s = JSON.parse(Sick_3.getData());
+var volume_data = [];
+var olhc_data = [];
+<!--console.log(Object.keys(s));-->
+var n = s['v'].length;
+
+for (i=0; i<n; i++) {
+	volume_data.push([s['t'][i]*1000, s['v'][i]]);
+}
+
+for (i=0; i<n; i++) {
+	olhc_data.push([s['t'][i]*1000, s['o'][i], s['l'][i], s['h'][i], s['c'][i]]);
+}
+
+
+
+$(document).ready(function() {
+
+Highcharts.setOptions({
+			      time: {
+			          timezoneOffset: 7*60
+			      }
+			    });
+chartOptions = {
+				rangeSelector: {
+			        selected: 2
+			    },
+
+			    title: {
+					text: s['s']+' Historical'
+				},
+
+				subtitle: {
+				       text: 'With SMA and Volume by Price technical indicators'
+				},
+
+				xAxis: {
+					type: 'datetime',
+				},
+
+				yAxis: [{
+				      startOnTick: false,
+				      endOnTick: false,
+				      labels: {
+				          align: 'right',
+				          x: -3
+				      },
+				          title: {
+				              text: 'OHLC'
+				          },
+				          height: '60%',
+				          lineWidth: 2,
+				          resize: {
+				              enabled: true
+				          },
+				          offset:0,
+				          opposite: true,
+				      }, {
+				          labels: {
+				              align: 'right',
+				              x: -2
+				          },
+				          title: {
+				              text: 'Volume'
+				          },
+				          top: '65%',
+				          height: '35%',
+				          offset: 0,
+				          lineWidth: 2,
+				          opposite: true,
+				      }],
+
+				    legend: {
+						enabled: false
+					},
+						tooltip: {
+						split: true
+					},
+						navigator:{
+						enabled:true,
+					},
+						scrollbar: {
+						enabled: true
+					},
+
+					series: [{
+						type: 'candlestick',
+						name: 'TSLA',
+						id: 'olhc',
+						zIndex: 2,
+						data: olhc_data,
+					}, {
+						type: 'column',
+						name: 'Volume',
+						id: 'volume',
+						data: volume_data,
+						yAxis: 1
+					}, {
+					type: 'vbp',
+					linkedTo: 'olhc',
+					params: {
+						volumeSeriesID: 'volume'
+					},
+					dataLabels: {
+						enabled: false
+					},
+					zoneLines: {
+						enabled: false
+					}
+					}, {
+						type: 'sma',
+						linkedTo: 'olhc',
+						zIndex: 5,
+						marker: {
+						  enabled: false
+						}
+					}]
+				};
+
+Highcharts.stockChart('chart_3', chartOptions);
+})
+
+</script>
+</body>
+</html>
