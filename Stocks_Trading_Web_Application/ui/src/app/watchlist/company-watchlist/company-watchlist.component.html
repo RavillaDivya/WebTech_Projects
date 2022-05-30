@@ -1,0 +1,30 @@
+<!-- <div class="container"> -->
+<div class="card mt-3">
+    <button type="button" class="close align-self-end" style="padding-right:0.5em; height: fit-content"
+        aria-label="Close" (click)="removeCompany()">
+        <span aria-hidden="true">×</span>
+    </button>
+    <div [routerLink]="['/search/', company.ticker]" class="mx-4 mb-3" style="cursor: pointer;">
+        <div class="row">
+            <div class="col-sm d-flex justify-content-between h3">
+                <div>{{company.ticker}}</div>
+                <div [style.color]="tickerStatus()">{{company.c | number: '1.2-2'}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm d-flex justify-content-between h5">
+                <div>{{company.name}}</div>
+                <div class="text-right"[style.color]="tickerStatus()">
+                    <ng-template [ngIf]="company?.dp > 0">
+                        <i class="bi bi-caret-up-fill"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="company?.dp < 0">
+                        <i class="bi bi-caret-down-fill"></i>
+                    </ng-template>
+                    {{company.d | formatter}} ({{company.dp | formatter}}%)</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- </div> -->

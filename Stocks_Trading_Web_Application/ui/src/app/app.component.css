@@ -1,0 +1,62 @@
+
+.bodyBackground::before {
+    content: "";
+    background-image: url('../assets/images/background-graph.jpg');
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    min-height: 100%;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.40;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.bodyBackground {
+    position: relative;
+    height: 100vh;
+}
+
+.header {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.content {
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding: 3px 5px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.containerTest {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-container {
+    background-image: url("../assets/images/background-graph.jpg");
+    background-size: cover;
+    padding-bottom: 60px;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0.829);
+    background-repeat: repeat-y;
+    background-blend-mode: overlay;
+    background-position: top;
+    overflow-x: hidden;
+}
+
+.footer {
+    padding: 5px;
+    width: 100%;
+    background-color: #b5b5b5;
+    color: white;
+    text-align: center;
+}

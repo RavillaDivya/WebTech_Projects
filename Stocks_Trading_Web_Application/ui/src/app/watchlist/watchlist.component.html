@@ -1,0 +1,32 @@
+<!-- <p>watchlist works!</p>
+<p>{{watchlist.size}}</p> -->
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <ngb-alert *ngIf="(message && message.ticker)" class="text-center" #selfClosingAlert type="danger"
+                (closed)="message = null">
+                {{message?.ticker | uppercase}} removed from Watchlist.
+            </ngb-alert>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="h1">
+                My Watchlist
+            </div>
+        </div>
+    </div>
+
+    <div [hidden]="(watchlist && watchlist.size > 0)" class="row">
+        <div class="col">
+            <div class="alert alert-warning text-center" role="alert">
+                Currently you don't have any stock in your watchlist.
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let item of watchlist | keyvalue: asIsOrder">
+        <app-company-watchlist [company]="item.value" (companyChange)="setMessage($event)"></app-company-watchlist>
+    </div>
+</div>
