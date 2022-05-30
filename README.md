@@ -1,4 +1,4 @@
-# WebTech_Projects
+# Web Development Projects
 
 Contains 2 major single page Web Tech projects and Android Appication project that I worked on. #Video of the working model uploaded by the TAs is attached 
 
